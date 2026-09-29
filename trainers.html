@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Звонкий мяч — детская школа волейбола, Омск</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500;1,600;1,800;1,900&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>*,*::before,*::after{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#DCE4F4;color:#0A1E4B;font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antialiased}a{color:#E71E2B;text-decoration:none}a:hover{color:#C4141F}input{font-family:inherit}input::placeholder{color:#6B7490}input:focus{outline:none;border-color:#0A1E4B !important}.hs::-webkit-scrollbar{display:none}</style>
+</helmet>
+
+<div style="max-width:430px;margin:0 auto;background:#fff;font-family:'Montserrat',sans-serif;color:#0A1E4B;overflow-x:clip;padding:10px 0 96px;position:relative;min-height:100vh">
+
+<header data-screen-label="00 Шапка" style="position:sticky;top:10px;z-index:60;margin:0 16px;height:60px;background:#fff;border-radius:999px;display:flex;align-items:center;gap:8px;padding:0 6px 0 18px;box-shadow:0 8px 24px rgba(10,30,75,.16)">
+  <a href="{{ homeHref }}" style="display:flex;flex:1;min-width:0"><img src="logo-horizontal.png" alt="Звонкий мяч" style="height:30px;display:block"></a>
+  <a href="tel:+73812000000" aria-label="Позвонить" style="width:48px;height:48px;border-radius:50%;background:#EEF2FA;color:#0A1E4B;display:flex;align-items:center;justify-content:center;flex:none"><span style="display:block;width:18px;height:18px;background:currentColor;-webkit-mask:url(icon-phone-bold.svg) center/contain no-repeat;mask:url(icon-phone-bold.svg) center/contain no-repeat"></span></a>
+  <div onClick="{{ toggleMenu }}" aria-label="Меню" style="width:48px;height:48px;border-radius:50%;background:#0A1E4B;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;flex:none">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" shape-rendering="geometricPrecision"><path d="M3 5h14M3 10h14M3 15h14"></path></svg>
+  </div>
+</header>
+
+<sc-if value="{{ isList }}" hint-placeholder-val="{{ true }}">
+  <section data-screen-label="01 Заголовок" style="margin:-68px 8px 0;border-radius:38px 38px 28px 28px;background:#EEF2FA;padding:92px 0 20px">
+    <div style="padding:0 20px">
+      <h1 style="margin:0;font:900 40px/1 'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:-.03em">Наши <span style="display:inline-block;background:#E71E2B;color:#fff;border-radius:16px;padding:0 14px 4px;transform:rotate(-2deg);margin-top:4px">тренеры</span></h1>
+      <div style="font:500 15px/1.55 'Montserrat',sans-serif;color:#48536F;margin-top:16px;text-wrap:pretty">Родители выбирают не школу, а тренера. Здесь можно заранее узнать о каждом: регалии, стаж, группы и залы.</div>
+    </div>
+    <div class="hs" style="display:flex;gap:8px;overflow-x:auto;padding:22px 12px 0;scrollbar-width:none">
+      <sc-for list="{{ hallFilters }}" as="f" hint-placeholder-count="6">
+        <div onClick="{{ f.pick }}" style="height:44px;padding:0 18px;white-space:nowrap;flex:none;border-radius:999px;background:{{ f.bg }};color:{{ f.fg }};display:flex;align-items:center;font:800 13px 'Montserrat',sans-serif;cursor:pointer">{{ f.t }}</div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section data-screen-label="02 Список тренеров" style="padding:24px 8px 40px">
+    <div style="font:700 14px 'Montserrat',sans-serif;color:#48536F;margin:0 12px 14px">{{ countLabel }}</div>
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px">
+      <sc-for list="{{ list }}" as="c" hint-placeholder-count="6">
+        <div onClick="{{ c.pick }}" style="display:flex;flex-direction:column;min-width:0;border-radius:22px;overflow:hidden;background:#fff;box-shadow:0 0 0 2px #EEF2FA inset;cursor:pointer">
+          <div style="position:relative;height:190px;background:{{ c.bg }};overflow:hidden">
+            <div style="position:absolute;left:8px;top:8px;z-index:2;height:26px;padding:0 10px;border-radius:999px;background:#fff;color:#E71E2B;display:flex;align-items:center;font:900 11px 'Montserrat',sans-serif;text-transform:uppercase;transform:rotate(-3deg);box-shadow:0 4px 10px rgba(10,30,75,.25);pointer-events:none;white-space:nowrap">Стаж&nbsp;{{ c.exp }}</div>
+            <img src="sign.png" alt="" style="position:absolute;width:190px;left:-30px;bottom:-40px;filter:{{ c.sf }};transform:rotate(-12deg);pointer-events:none">
+            <div style="position:absolute;inset:12px 12px 0;border-radius:14px 14px 0 0;overflow:hidden;background:rgba(220,228,244,.95)"><image-slot id="{{ c.slot }}" shape="rect" placeholder="Портрет"></image-slot></div>
+          </div>
+          <div style="padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1">
+            <div style="font:900 14px/1.2 'Montserrat',sans-serif;text-transform:uppercase">{{ c.name }}</div>
+            <div style="font:500 12px/1.4 'Montserrat',sans-serif;color:#48536F">{{ c.spec }}</div>
+            <div style="display:flex;align-items:center;gap:4px;margin-top:auto;padding-top:4px;font:700 11px/1.3 'Montserrat',sans-serif;color:#0A1E4B"><span style="display:block;width:12px;height:12px;flex:none;background:#E71E2B;-webkit-mask:url(icon-map-pin.svg) center/contain no-repeat;mask:url(icon-map-pin.svg) center/contain no-repeat"></span>{{ c.hallNames }}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+</sc-if>
+
+<sc-if value="{{ isDetail }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Т1 Тренер" style="margin:-68px 8px 0;border-radius:38px 38px 28px 28px;background:#EEF2FA;padding:88px 12px 16px">
+    <div style="display:flex;gap:8px;font:600 13px 'Montserrat',sans-serif;color:#48536F;padding:0 8px;flex-wrap:wrap"><a href="{{ homeHref }}" style="color:#48536F">Главная</a><div>/</div><div onClick="{{ backToList }}" style="cursor:pointer">Тренеры</div><div>/</div><div style="color:#0A1E4B">{{ coach.name }}</div></div>
+    <div style="position:relative;height:360px;border-radius:24px;background:{{ coach.bg }};overflow:hidden;margin-top:16px">
+      <img src="sign.png" alt="" style="position:absolute;width:320px;left:-60px;bottom:-80px;filter:{{ coach.sf }};transform:rotate(-12deg);pointer-events:none">
+      <div style="position:absolute;inset:18px 18px 0;border-radius:18px 18px 0 0;overflow:hidden;background:rgba(220,228,244,.95)"><image-slot id="{{ coach.slot }}" shape="rect" placeholder="Портрет тренера"></image-slot></div>
+    </div>
+    <div style="padding:20px 8px 0;display:flex;flex-direction:column;gap:14px">
+      <div style="align-self:flex-start;height:32px;padding:0 14px;border-radius:999px;background:#fff;display:flex;align-items:center;font:800 12px 'Montserrat',sans-serif;color:#E71E2B">{{ coach.role }}</div>
+      <h1 style="margin:0;font:900 34px/1.02 'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:-.02em">{{ coach.name }}</h1>
+    </div>
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;margin-top:18px">
+      <div style="background:#fff;border-radius:18px;padding:14px 16px"><div style="font:italic 600 12px 'Montserrat',sans-serif;color:#48536F">Стаж с детьми</div><div style="font:900 20px/1.2 'Montserrat',sans-serif;margin-top:4px">{{ coach.exp }}</div></div>
+      <div style="background:#fff;border-radius:18px;padding:14px 16px"><div style="font:italic 600 12px 'Montserrat',sans-serif;color:#48536F">Возраст групп</div><div style="font:900 20px/1.2 'Montserrat',sans-serif;margin-top:4px">{{ coach.ages }}</div></div>
+      <div style="grid-column:span 2;background:#fff;border-radius:18px;padding:14px 16px"><div style="font:italic 600 12px 'Montserrat',sans-serif;color:#48536F">Залы</div><div style="font:800 15px/1.3 'Montserrat',sans-serif;margin-top:4px">{{ coach.hallNames }}</div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;padding:20px 8px 0">
+      <sc-for list="{{ coach.creds }}" as="r" hint-placeholder-count="3">
+        <div style="display:flex;gap:10px;align-items:baseline;font:600 15px/1.45 'Montserrat',sans-serif"><div style="width:8px;height:8px;border-radius:50%;background:#E71E2B;flex:none"></div>{{ r }}</div>
+      </sc-for>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-top:22px">
+      <div onClick="{{ openCoach }}" style="height:56px;border-radius:999px;background:#E71E2B;color:#fff;display:flex;align-items:center;justify-content:center;font:800 15px 'Montserrat',sans-serif;cursor:pointer">Записаться к этому тренеру</div>
+      <a href="#coach-schedule" style="height:56px;border-radius:999px;background:#fff;color:#0A1E4B;display:flex;align-items:center;justify-content:center;font:800 15px 'Montserrat',sans-serif">Где и когда ведёт</a>
+    </div>
+  </section>
+
+  <section data-screen-label="Т2 О подходе" style="padding:40px 8px 0">
+    <h2 style="margin:0 12px 22px;font:900 30px/1.05 'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:-.02em">Как я работаю с&nbsp;детьми</h2>
+    <div style="position:relative;background:#EEF2FA;border-radius:24px;padding:30px 22px 24px">
+      <div style="position:absolute;top:-12px;left:36px;width:80px;height:24px;background:rgba(220,228,244,.95);transform:rotate(-3deg)"></div>
+      <div style="font:900 64px/.5 'Montserrat',sans-serif;color:#E71E2B;height:28px">«</div>
+      <div style="font:italic 600 15px/1.6 'Montserrat',sans-serif;margin-top:8px">Здесь будет 2–3 предложения от первого лица: как тренер находит подход к новичкам, что для него важно на тренировке и чем он гордится в своих учениках</div>
+      <sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}">
+        <div style="font:italic 500 12px/1.4 'Montserrat',sans-serif;color:#E71E2B;margin-top:14px">Нужно от школы: текст от тренера, 400–600 знаков</div>
+      </sc-if>
+    </div>
+  </section>
+
+  <section id="coach-schedule" data-screen-label="Т3 Где и когда ведёт" style="padding:40px 8px 0">
+    <h2 style="margin:0 12px 20px;font:900 30px/1.05 'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:-.02em">Где и когда ведёт</h2>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <sc-for list="{{ coachRows }}" as="r" hint-placeholder-count="2">
+        <div style="background:#EEF2FA;border-radius:22px;padding:16px 16px 16px 20px;display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+            <div style="font:900 15px 'Montserrat',sans-serif;text-transform:uppercase">{{ r.day }}</div>
+            <div style="font:900 17px 'Montserrat',sans-serif;color:#E71E2B;display:flex;align-items:center;gap:6px;white-space:nowrap"><span style="display:block;width:16px;height:16px;background:currentColor;-webkit-mask:url(icon-clock.svg) center/contain no-repeat;mask:url(icon-clock.svg) center/contain no-repeat"></span>{{ r.time }}</div>
+          </div>
+          <div style="font:700 14px/1.4 'Montserrat',sans-serif">{{ r.group }} · {{ r.age }}</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+            <div style="font:600 13px 'Montserrat',sans-serif;color:#48536F;display:flex;align-items:center;gap:6px"><span style="display:block;width:14px;height:14px;background:currentColor;-webkit-mask:url(icon-map-pin.svg) center/contain no-repeat;mask:url(icon-map-pin.svg) center/contain no-repeat"></span>{{ r.hallName }}</div>
+            <div onClick="{{ r.book }}" style="height:44px;padding:0 18px;border-radius:999px;background:#0A1E4B;color:#fff;display:flex;align-items:center;font:800 13px 'Montserrat',sans-serif;cursor:pointer;flex:none">Записаться</div>
+          </div>
+        </div>
+      </sc-for>
+      <sc-if value="{{ noCoachRows }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#EEF2FA;border-radius:22px;padding:20px;font:600 14px/1.5 'Montserrat',sans-serif">Расписание этого тренера уточняется — оставьте заявку, и&nbsp;мы подберём время</div>
+      </sc-if>
+    </div>
+    <a href="{{ scheduleHref }}" style="display:flex;align-items:center;gap:6px;font:800 14px 'Montserrat',sans-serif;color:#E71E2B;margin:16px 12px 0">Всё расписание школы<span style="display:block;width:16px;height:16px;background:currentColor;-webkit-mask:url(icon-arrow-right.svg) center/contain no-repeat;mask:url(icon-arrow-right.svg) center/contain no-repeat"></span></a>
+  </section>
+
+  <section data-screen-label="Т4 Другие тренеры" style="padding:40px 8px">
+    <h2 style="margin:0 12px 20px;font:900 30px/1.05 'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:-.02em">Другие тренеры</h2>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <sc-for list="{{ others }}" as="c" hint-placeholder-count="3">
+        <div onClick="{{ c.pick }}" style="display:flex;gap:14px;align-items:center;background:#EEF2FA;border-radius:22px;padding:10px;cursor:pointer">
+          <div style="width:76px;height:76px;border-radius:16px;overflow:hidden;background:{{ c.bg }};flex:none;position:relative"><image-slot id="{{ c.slot }}" shape="rect" placeholder="Фото"></image-slot></div>
+          <div style="display:flex;flex-direction:column;gap:4px;min-width:0;flex:1">
+            <div style="font:900 14px/1.2 'Montserrat',sans-serif;text-transform:uppercase">{{ c.name }}</div>
+            <div style="font:500 12px/1.4 'Montserrat',sans-serif;color:#48536F">{{ c.spec }}</div>
+          </div>
+          <div style="width:36px;height:36px;border-radius:50%;background:#E71E2B;color:#fff;display:flex;align-items:center;justify-content:center;flex:none;margin-right:4px"><span style="display:block;width:16px;height:16px;background:currentColor;-webkit-mask:url(icon-arrow-right.svg) center/contain no-repeat;mask:url(icon-arrow-right.svg) center/contain no-repeat"></span></div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+</sc-if>
+
+<section data-screen-label="03 Блок записи" style="margin:0 8px;border-radius:28px;background:#E71E2B;padding:36px 20px 20px;position:relative;overflow:hidden">
+  <img src="circle-stripes.png" alt="" style="position:absolute;width:240px;right:-90px;top:-90px;opacity:.5;pointer-events:none">
+  <div style="position:relative;display:flex;flex-direction:column;gap:12px">
+    <h2 style="margin:0;font:900 28px/1.08 'Montserrat',sans-serif;color:#fff;text-transform:uppercase;letter-spacing:-.02em">Не знаете, к кому записаться?</h2>
+    <div style="font:600 15px/1.5 'Montserrat',sans-serif;color:#fff">Подберём тренера под возраст ребёнка и зал рядом с домом. Первое занятие бесплатно.</div>
+    <div onClick="{{ openPlain }}" style="margin-top:8px;height:56px;border-radius:999px;background:#fff;color:#E71E2B;display:flex;align-items:center;justify-content:center;font:800 15px 'Montserrat',sans-serif;cursor:pointer">Записаться на пробное</div>
+  </div>
+</section>
+
+<footer id="contacts" data-screen-label="04 Подвал" style="padding:40px 20px 24px;display:flex;flex-direction:column;gap:28px">
+  <a href="{{ homeHref }}"><img src="logo-block.png" alt="Звонкий мяч — детская спортивная школа" style="width:140px"></a>
+  <div style="display:flex;flex-direction:column;gap:10px">
+    <div style="font:900 12px 'Montserrat',sans-serif;color:#E71E2B;text-transform:uppercase;margin-bottom:4px">Контакты</div>
+    <a href="tel:+73812000000" style="font:800 20px/1.3 'Montserrat',sans-serif;color:#0A1E4B;display:flex;align-items:center;gap:10px"><span style="display:block;width:18px;height:18px;background:currentColor;-webkit-mask:url(icon-phone-bold.svg) center/contain no-repeat;mask:url(icon-phone-bold.svg) center/contain no-repeat"></span>+7 (3812) 00-00-00</a>
+    <a href="mailto:info@zvonkiy-myach.ru" style="font:600 14px/1.3 'Montserrat',sans-serif;color:#0A1E4B;display:flex;align-items:center;gap:10px"><span style="display:block;width:16px;height:16px;background:currentColor;-webkit-mask:url(icon-mail.svg) center/contain no-repeat;mask:url(icon-mail.svg) center/contain no-repeat"></span>info@zvonkiy-myach.ru</a>
+    <div style="font:500 14px/1.3 'Montserrat',sans-serif;color:#48536F;display:flex;align-items:center;gap:10px"><span style="display:block;width:16px;height:16px;background:currentColor;-webkit-mask:url(icon-clock.svg) center/contain no-repeat;mask:url(icon-clock.svg) center/contain no-repeat"></span>Пн–Сб, 09:00–20:00</div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:10px">
+    <div style="font:900 12px 'Montserrat',sans-serif;color:#E71E2B;text-transform:uppercase;margin-bottom:4px">Залы</div>
+    <sc-for list="{{ halls }}" as="h" hint-placeholder-count="5"><a href="{{ h.href }}" style="font:600 14px/1.3 'Montserrat',sans-serif;color:#0A1E4B;display:flex;align-items:center;gap:8px;min-height:28px"><span style="display:block;width:14px;height:14px;flex:none;background:currentColor;-webkit-mask:url(icon-map-pin.svg) center/contain no-repeat;mask:url(icon-map-pin.svg) center/contain no-repeat"></span>{{ h.name }} · {{ h.addr }}</a></sc-for>
+  </div>
+  <div style="border-top:1px solid #DCE4F4;padding-top:18px;display:flex;flex-direction:column;gap:8px;font:500 12px/1.5 'Montserrat',sans-serif;color:#48536F">
+    <div>АНО «Звонкий мяч» · ИНН 0000000000 · ОГРН 0000000000000 · г. Омск</div>
+    <a href="#" style="color:#48536F">Политика обработки данных</a>
+    <a href="#" style="color:#48536F">Публичная оферта</a>
+  </div>
+</footer>
+
+<sc-if value="{{ showBar }}" hint-placeholder-val="{{ true }}">
+  <div style="position:fixed;left:50%;bottom:0;width:100%;max-width:430px;transform:translateX(-50%);z-index:70;padding:10px 10px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(rgba(255,255,255,0),#fff 40%);display:flex;gap:8px">
+    <div onClick="{{ barAction }}" style="flex:1;height:58px;border-radius:999px;background:#E71E2B;color:#fff;display:flex;align-items:center;justify-content:center;font:800 16px 'Montserrat',sans-serif;cursor:pointer;box-shadow:0 10px 24px rgba(231,30,43,.35)">{{ barLabel }}</div>
+    <a href="tel:+73812000000" aria-label="Позвонить" style="width:58px;height:58px;border-radius:50%;background:#0A1E4B;color:#fff;display:flex;align-items:center;justify-content:center;flex:none"><span style="display:block;width:20px;height:20px;background:currentColor;-webkit-mask:url(icon-phone-bold.svg) center/contain no-repeat;mask:url(icon-phone-bold.svg) center/contain no-repeat"></span></a>
+  </div>
+</sc-if>
+
+<sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;top:0;bottom:0;left:50%;width:100%;max-width:430px;transform:translateX(-50%);z-index:250;background:#0A1E4B;color:#fff;display:flex;flex-direction:column;padding:10px 10px 24px;overflow:auto">
+    <div style="height:60px;background:#fff;border-radius:999px;display:flex;align-items:center;padding:0 6px 0 18px">
+      <img src="logo-horizontal.png" alt="Звонкий мяч" style="height:30px;flex:none">
+      <div style="flex:1"></div>
+      <div onClick="{{ toggleMenu }}" aria-label="Закрыть" style="width:48px;height:48px;border-radius:50%;background:#E71E2B;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer"><span style="display:block;width:20px;height:20px;background:currentColor;-webkit-mask:url(icon-x.svg) center/contain no-repeat;mask:url(icon-x.svg) center/contain no-repeat"></span></div>
+    </div>
+    <nav style="display:flex;flex-direction:column;padding:28px 12px 0">
+      <sc-for list="{{ menu }}" as="m" hint-placeholder-count="5">
+        <a href="{{ m.href }}" onClick="{{ closeMenu }}" style="display:flex;justify-content:space-between;align-items:center;min-height:64px;border-bottom:1px solid rgba(255,255,255,.14);font:900 24px/1.1 'Montserrat',sans-serif;text-transform:uppercase;color:{{ m.color }}">{{ m.t }}<span style="display:block;width:20px;height:20px;background:#E71E2B;-webkit-mask:url(icon-arrow-right.svg) center/contain no-repeat;mask:url(icon-arrow-right.svg) center/contain no-repeat"></span></a>
+      </sc-for>
+    </nav>
+    <div style="margin-top:auto;padding:28px 12px 0;display:flex;flex-direction:column;gap:12px">
+      <a href="tel:+73812000000" style="font:800 22px 'Montserrat',sans-serif;color:#fff">+7 (3812) 00-00-00</a>
+      <div style="font:500 14px 'Montserrat',sans-serif;color:#DCE4F4">Пн–Сб, 09:00–20:00</div>
+      <div onClick="{{ openFromMenu }}" style="margin-top:8px;height:58px;border-radius:999px;background:#E71E2B;color:#fff;display:flex;align-items:center;justify-content:center;font:800 16px 'Montserrat',sans-serif;cursor:pointer">Записаться на пробное</div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ modal }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ close }}" style="position:fixed;inset:0;z-index:300;background:rgba(10,30,75,.82);display:flex;align-items:flex-end;justify-content:center">
+    <div onClick="{{ stop }}" style="width:100%;max-width:430px;max-height:92vh;overflow:auto;background:#fff;border-radius:28px 28px 0 0;padding:12px 20px calc(24px + env(safe-area-inset-bottom))">
+      <div style="width:44px;height:5px;border-radius:999px;background:#DCE4F4;margin:0 auto 18px"></div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
+        <div style="font:900 24px/1.1 'Montserrat',sans-serif;color:#0A1E4B;text-transform:uppercase">Запись на<br><span style="display:inline-block;background:#E71E2B;color:#fff;border-radius:12px;padding:0 10px 3px;margin-top:4px;transform:rotate(-2deg)">пробное</span></div>
+        <div onClick="{{ close }}" aria-label="Закрыть" style="width:44px;height:44px;border-radius:50%;background:#EEF2FA;color:#0A1E4B;flex:none;display:flex;align-items:center;justify-content:center;cursor:pointer"><span style="display:block;width:20px;height:20px;background:currentColor;-webkit-mask:url(icon-x.svg) center/contain no-repeat;mask:url(icon-x.svg) center/contain no-repeat"></span></div>
+      </div>
+      <sc-if value="{{ hasCtx }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:16px;background:#EEF2FA;border-radius:16px;padding:12px 16px;font:700 13px/1.4 'Montserrat',sans-serif">{{ ctx }}</div>
+      </sc-if>
+      <sc-if value="{{ fm.notSent }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:18px">
+          <input value="{{ fm.name }}" onChange="{{ fm.onName }}" placeholder="Имя родителя" style="height:56px;border:2px solid {{ fm.nameBc }};border-radius:999px;padding:0 22px;font:600 16px 'Montserrat',sans-serif;color:#0A1E4B;background:#fff;width:100%">
+          <input value="{{ fm.phone }}" onChange="{{ fm.onPhone }}" type="tel" placeholder="Телефон" style="height:56px;border:2px solid {{ fm.phoneBc }};border-radius:999px;padding:0 22px;font:600 16px 'Montserrat',sans-serif;color:#0A1E4B;background:#fff;width:100%">
+          <input value="{{ fm.age }}" onChange="{{ fm.onAge }}" inputMode="numeric" placeholder="Возраст ребёнка" style="height:56px;border:2px solid {{ fm.ageBc }};border-radius:999px;padding:0 22px;font:600 16px 'Montserrat',sans-serif;color:#0A1E4B;background:#fff;width:100%">
+          <div onClick="{{ fm.toggleConsent }}" style="display:flex;gap:12px;align-items:center;cursor:pointer;min-height:44px">
+            <div style="width:24px;height:24px;flex:none;border-radius:6px;border:2px solid {{ fm.consentBc }};background:{{ fm.consentBg }};color:#fff;display:flex;align-items:center;justify-content:center;font:700 13px 'Montserrat',sans-serif">{{ fm.check }}</div>
+            <div style="font:500 13px/1.5 'Montserrat',sans-serif;color:#48536F">Согласен на обработку <a href="#">персональных данных</a></div>
+          </div>
+          <sc-if value="{{ fm.showError }}" hint-placeholder-val="{{ false }}"><div style="font:600 13px 'Montserrat',sans-serif;color:#E71E2B">Заполните отмеченные поля</div></sc-if>
+          <div onClick="{{ fm.submit }}" style="height:58px;margin-top:4px;border-radius:999px;background:#E71E2B;color:#fff;display:flex;align-items:center;justify-content:center;font:800 16px 'Montserrat',sans-serif;cursor:pointer">Отправить заявку</div>
+          <div style="font:italic 500 13px/1.5 'Montserrat',sans-serif;color:#48536F;text-align:center">Перезвоним в течение дня и подберём группу</div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ fm.sent }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:12px;padding:22px 0 4px">
+          <img src="sign.png" alt="" style="width:60px;height:60px">
+          <div style="font:900 22px/1.15 'Montserrat',sans-serif;color:#0A1E4B;text-transform:uppercase">Заявка отправлена</div>
+          <div style="font:500 14px/1.5 'Montserrat',sans-serif;color:#48536F">Администратор перезвонит и подтвердит время</div>
+          <div onClick="{{ close }}" style="height:54px;margin-top:6px;border-radius:999px;background:#0A1E4B;color:#fff;display:flex;align-items:center;justify-content:center;font:700 15px 'Montserrat',sans-serif;cursor:pointer">Хорошо</div>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:390,&quot;height&quot;:844},&quot;showNotes&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Макет&quot;}}">
+const blankForm = () => ({ name: '', phone: '', age: '', consent: false, tried: false, sent: false });
+const HOME = 'index.html', TR = 'trainers.html', SCH = 'schedule.html', PR = 'price.html', PAR = 'parents.html';
+const HALLS = [
+  { id: 1, name: 'Центральный', addr: 'ул. Примерная, 1' }, { id: 2, name: 'Кировский', addr: 'ул. Примерная, 2' },
+  { id: 3, name: 'Советский', addr: 'ул. Примерная, 3' }, { id: 4, name: 'Октябрьский', addr: 'ул. Примерная, 4' },
+  { id: 5, name: 'Ленинский', addr: 'ул. Примерная, 5' }
+];
+const COACHES = [
+  { slug: 'maltseva', slot: 'coach-1', name: 'Ирина Мальцева', role: 'Старший тренер, КМС', spec: 'Группы 9–14 лет, техника приёма', exp: '12 лет', ages: '9–14 лет', halls: [1, 5] },
+  { slug: 'kovalev', slot: 'coach-2', name: 'Андрей Ковалёв', role: 'Тренер младших групп', spec: 'Младшие группы 6–8 лет', exp: '7 лет', ages: '6–8 лет', halls: [2] },
+  { slug: 'sokolova', slot: 'coach-3', name: 'Мария Соколова', role: 'Тренер, судья I категории', spec: 'Группы 9–11 лет, судья первой категории', exp: '9 лет', ages: '9–11 лет', halls: [3] },
+  { slug: 'lapin', slot: 'coach-4', name: 'Дмитрий Лапин', role: 'Тренер спортивных групп, МС', spec: 'Спортивные группы 12–14 лет', exp: '15 лет', ages: '12–14 лет', halls: [4] },
+  { slug: 'gushchina', slot: 'coach-5', name: 'Наталья Гущина', role: 'Тренер младших групп', spec: 'Младшие группы, ОФП', exp: '5 лет', ages: '6–8 лет', halls: [1] },
+  { slug: 'reznik', slot: 'coach-6', name: 'Павел Резник', role: 'Тренер', spec: 'Группы 9–11 лет', exp: '6 лет', ages: '9–11 лет', halls: [5, 2] },
+  { slug: 'kim', slot: 'coach-7', name: 'Юлия Ким', role: 'Тренер младших групп', spec: 'Группы 6–8 лет, игровая подготовка', exp: '4 года', ages: '6–8 лет', halls: [3] },
+  { slug: 'belov', slot: 'coach-8', name: 'Артём Белов', role: 'Тренер спортивных групп', spec: 'Спортивные группы, подача и блок', exp: '11 лет', ages: '12–14 лет', halls: [4, 1] },
+  { slug: 'yurieva', slot: 'coach-9', name: 'Светлана Юрьева', role: 'Тренер', spec: 'Группы 9–14 лет', exp: '8 лет', ages: '9–14 лет', halls: [1, 3] }
+];
+const SCHEDULE = [
+  { day: 'Вторник', time: '16:00–17:00', group: 'Начальная', age: '6–8 лет', hall: 1, coach: 'gushchina' },
+  { day: 'Вторник', time: '17:00–18:30', group: 'Учебная', age: '9–11 лет', hall: 1, coach: 'maltseva' },
+  { day: 'Вторник', time: '18:45–20:15', group: 'Спортивная', age: '12–14 лет', hall: 4, coach: 'lapin' },
+  { day: 'Среда', time: '16:00–17:00', group: 'Начальная', age: '6–8 лет', hall: 2, coach: 'kovalev' },
+  { day: 'Среда', time: '17:15–18:45', group: 'Учебная', age: '9–11 лет', hall: 3, coach: 'sokolova' },
+  { day: 'Четверг', time: '17:00–18:30', group: 'Учебная', age: '9–11 лет', hall: 1, coach: 'maltseva' },
+  { day: 'Четверг', time: '18:45–20:15', group: 'Спортивная', age: '12–14 лет', hall: 1, coach: 'belov' },
+  { day: 'Пятница', time: '16:30–17:30', group: 'Начальная', age: '6–8 лет', hall: 3, coach: 'kim' },
+  { day: 'Суббота', time: '10:00–11:30', group: 'Учебная', age: '9–11 лет', hall: 5, coach: 'reznik' },
+  { day: 'Суббота', time: '12:00–13:30', group: 'Учебная', age: '9–14 лет', hall: 3, coach: 'yurieva' }
+];
+const hallName = id => (HALLS.find(h => h.id === id) || {}).name;
+
+class Component extends DCLogic {
+  state = { modal: false, menuOpen: false, ctx: '', hall: 0, slug: null, form: blankForm() };
+
+  componentDidMount() {
+    const p = new URLSearchParams(window.location.search);
+    const slug = p.get('coach'); const hall = +p.get('hall') || 0;
+    if (slug && COACHES.some(c => c.slug === slug)) this.setState({ slug });
+    if (hall) this.setState({ hall });
+    this.onKey = e => { if (e.key === 'Escape') this.setState({ menuOpen: false }, this.closeModal); };
+    window.addEventListener('keydown', this.onKey);
+  }
+  componentWillUnmount() { window.removeEventListener('keydown', this.onKey); }
+
+  closeModal = () => this.setState({ modal: false, form: blankForm() });
+  openModal = ctx => this.setState({ modal: true, menuOpen: false, ctx: ctx || '' });
+  pickCoach = slug => {
+    this.setState({ slug });
+    try { history.replaceState(null, '', '?coach=' + slug); } catch (e) {}
+    window.scrollTo(0, 0);
+  };
+
+  form() {
+    const f = this.state.form;
+    const set = patch => this.setState(s => ({ form: { ...s.form, ...patch } }));
+    const ok = f.name.trim() && f.phone.trim() && f.age.trim() && f.consent;
+    const bc = v => (f.tried && !v ? '#E71E2B' : '#DCE4F4');
+    return { ...f, notSent: !f.sent, showError: f.tried && !ok,
+      nameBc: bc(f.name.trim()), phoneBc: bc(f.phone.trim()), ageBc: bc(f.age.trim()),
+      consentBc: f.consent || f.tried ? '#E71E2B' : '#6B7490', consentBg: f.consent ? '#E71E2B' : '#fff', check: f.consent ? '✓' : '',
+      onName: e => set({ name: e.target.value }), onPhone: e => set({ phone: e.target.value }), onAge: e => set({ age: e.target.value }),
+      toggleConsent: () => set({ consent: !f.consent }), submit: () => (ok ? set({ sent: true }) : set({ tried: true })) };
+  }
+
+  deco(c, i) {
+    return { ...c, hallNames: c.halls.map(hallName).join(', '), bg: i % 2 ? '#E71E2B' : '#0A1E4B', sf: i % 2 ? 'brightness(0) invert(1)' : 'none', pick: () => this.pickCoach(c.slug) };
+  }
+
+  renderVals() {
+    const { hall, slug } = this.state;
+    const all = COACHES.map((c, i) => this.deco(c, i));
+    const list = hall ? all.filter(c => c.halls.includes(hall)) : all;
+    const coach = all.find(c => c.slug === slug) || all[0];
+    const coachRows = SCHEDULE.filter(r => r.coach === coach.slug).map(r => ({ ...r, hallName: hallName(r.hall), book: () => this.openModal(`${r.group} группа, ${r.age} · ${r.day}, ${r.time} · ${hallName(r.hall)} · ${coach.name}`) }));
+    const ends = n => (n % 10 === 1 && n % 100 !== 11 ? 'тренер' : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 'тренера' : 'тренеров');
+    const openCoach = () => this.openModal('Тренер: ' + coach.name + ' · ' + coach.hallNames);
+    return {
+      showNotes: this.props.showNotes ?? true,
+      homeHref: HOME, scheduleHref: SCH,
+      menu: [{ t: 'Расписание и залы', href: SCH }, { t: 'Тренеры', href: TR, on: 1 }, { t: 'Стоимость', href: PR }, { t: 'Родителям', href: PAR }, { t: 'Контакты', href: '#contacts' }].map(m => ({ ...m, color: m.on ? '#E71E2B' : '#fff' })),
+      halls: HALLS.map(h => ({ ...h, href: SCH + '?hall=' + h.id })),
+      isList: !slug, isDetail: !!slug,
+      hallFilters: [{ id: 0, t: 'Все залы' }, ...HALLS.map(h => ({ id: h.id, t: h.name }))].map(f => ({ ...f,
+        bg: f.id === hall ? '#0A1E4B' : '#fff', fg: f.id === hall ? '#fff' : '#0A1E4B', pick: () => this.setState({ hall: f.id }) })),
+      list, countLabel: `${list.length} ${ends(list.length)}`,
+      coach: { ...coach, creds: [`Стаж работы с детьми — ${coach.exp}`, coach.spec, 'Образование и спортивные достижения — нужно от школы'] },
+      coachRows, noCoachRows: coachRows.length === 0,
+      others: all.filter(c => c.slug !== coach.slug && c.halls.some(h => coach.halls.includes(h))).concat(all.filter(c => c.slug !== coach.slug)).filter((c, i, a) => a.findIndex(x => x.slug === c.slug) === i).slice(0, 3),
+      backToList: () => { this.setState({ slug: null }); try { history.replaceState(null, '', window.location.pathname); } catch (e) {} },
+      openCoach,
+      openPlain: () => this.openModal(''),
+      barLabel: slug ? 'Записаться к тренеру' : 'Записаться на пробное',
+      barAction: slug ? openCoach : () => this.openModal(''),
+      showBar: !this.state.modal && !this.state.menuOpen,
+      menuOpen: this.state.menuOpen,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      openFromMenu: () => this.openModal(''),
+      modal: this.state.modal, ctx: this.state.ctx, hasCtx: !!this.state.ctx,
+      close: this.closeModal, stop: e => e.stopPropagation(),
+      fm: this.form()
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Звонкий мяч — детская школа волейбола, Омск</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500;1,600;1,800;1,900&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>*,*::before,*::after{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#DCE4F4;color:#0A1E4B;font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antialiased}a{color:#E71E2B;text-decoration:none}a:hover{color:#C4141F}input{font-family:inherit}input::placeholder{color:#6B7490}input:focus{outline:none;border-color:#0A1E4B !important}.hs::-webkit-scrollbar{display:none}</style>
+</helmet>
+
+<div style="max-width:430px;margin:0 auto;background:#fff;font-family:'Montserrat',sans-serif;color:#0A1E4B;overflow-x:clip;padding:10px 0 96px;position:relative;min-height:100vh">
+
+<header data-screen-label="00 Шапка" style="position:sticky;top:10px;z-index:60;margin:0 16px;height:60px;background:#fff;border-radius:999px;display:flex;align-items:center;gap:8px;padding:0 6px 0 18px;box-shadow:0 8px 24px rgba(10,30,75,.16)">
+  <a href="{{ homeHref }}" style="display:flex;flex:1;min-width:0"><img src="logo-horizontal.png" alt="Звонкий мяч" style="height:30px;display:block"></a>
+  <a href="tel:+73812000000" aria-label="Позвонить" style="width:48px;height:48px;border-radius:50%;background:#EEF2FA;color:#0A1E4B;display:flex;align-items:center;justify-content:center;flex:none"><span style="display:block;width:18px;height:18px;background:currentColor;-webkit-mask:url(icon-phone-bold.svg) center/contain no-repeat;mask:url(icon-phone-bold.svg) center/contain no-repeat"></span></a>
+  <div onClick="{{ toggleMenu }}" aria-label="Меню" style="width:48px;height:48px;border-radius:50%;background:#0A1E4B;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;flex:none">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" shape-rendering="geometricPrecision"><path d="M3 5h14M3 10h14M3 15h14"></path></svg>
+  </div>
+</header>
+
+<section data-screen-label="01 Заголовок и фильтры" style="margin:-68px 8px 0;border-radius:38px 38px 28px 28px;background:#EEF2FA;padding:92px 0 28px">
+  <div style="padding:0 20px">
+    <h1 style="margin:0;font:900 38px/1 'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:-.03em">Расписание<br><span style="display:inline-block;background:#E71E2B;color:#fff;border-radius:16px;padding:0 14px 4px;transform:rotate(-2deg);margin-top:4px">и залы</span></h1>
+    <div style="font:500 15px/1.55 'Montserrat',sans-serif;color:#48536F;margin-top:16px;text-wrap:pretty">Выберите район и&nbsp;возраст ребёнка&nbsp;— покажем тренировки рядом с&nbsp;домом. На&nbsp;любую можно записаться на&nbsp;бесплатное пробное.</div>
+  </div>
+</section>
+
+<section id="schedule" data-screen-label="02 Расписание" style="padding:32px 8px 40px">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 12px 16px">
+    <h2 style="margin:0;font:900 28px/1.05 'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:-.02em">Тренировки</h2>
+    <div style="font:700 13px/1 'Montserrat',sans-serif;color:#48536F;white-space:nowrap">{{ countLabel }}</div>
+  </div>
+  <div style="margin:0 4px 14px;display:flex;gap:6px">
+    <sc-for list="{{ filterBtns }}" as="b" hint-placeholder-count="2">
+      <div onClick="{{ b.open }}" style="flex:1;min-width:0;height:52px;border-radius:999px;background:{{ b.bg }};color:{{ b.fg }};display:flex;align-items:center;gap:8px;padding:0 14px 0 18px;cursor:pointer">
+        <div style="display:flex;flex-direction:column;gap:2px;min-width:0;flex:1">
+          <div style="font:600 11px/1 'Montserrat',sans-serif;opacity:.75">{{ b.label }}</div>
+          <div style="font:800 14px/1.1 'Montserrat',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ b.value }}</div>
+        </div>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="m6 9 6 6 6-6"></path></svg>
+      </div>
+    </sc-for>
+    <sc-if value="{{ hasFilter }}" hint-placeholder-val="{{ false }}">
+      <div onClick="{{ reset }}" aria-label="Сбросить фильтры" style="height:52px;width:52px;flex:none;border-radius:50%;background:#E71E2B;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer"><span style="display:block;width:18px;height:18px;background:currentColor;-webkit-mask:url(icon-x.svg) center/contain no-repeat;mask:url(icon-x.svg) center/contain no-repeat"></span></div>
+    </sc-if>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <sc-for list="{{ days }}" as="d" hint-placeholder-count="4">
+      <div style="background:#EEF2FA;border-radius:24px;padding:8px">
+        <div style="display:flex;justify-content:space-between;align-items:center;background:#0A1E4B;color:#fff;border-radius:18px;padding:14px 18px">
+          <div style="font:900 17px/1.1 'Montserrat',sans-serif;text-transform:uppercase">{{ d.day }}</div>
+          <div style="font:italic 600 12px 'Montserrat',sans-serif">{{ d.count }}</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:6px">
+          <sc-for list="{{ d.rows }}" as="r" hint-placeholder-count="2">
+            <div onClick="{{ r.book }}" style="background:#fff;border-radius:18px;padding:14px 12px 14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer">
+              <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:6px">
+                <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">
+                  <div style="font:900 17px 'Montserrat',sans-serif;color:#E71E2B;white-space:nowrap">{{ r.time }}</div>
+                  <div style="font:800 13px 'Montserrat',sans-serif">{{ r.group }} · {{ r.age }}</div>
+                </div>
+                <div style="font:600 12px/1.4 'Montserrat',sans-serif;color:#48536F">{{ r.hallName }}, {{ r.hallAddr }} · {{ r.coachName }}</div>
+              </div>
+              <div aria-label="Записаться" style="width:40px;height:40px;border-radius:50%;background:#EEF2FA;color:#E71E2B;display:flex;align-items:center;justify-content:center;flex:none"><span style="display:block;width:16px;height:16px;background:currentColor;-webkit-mask:url(icon-arrow-right.svg) center/contain no-repeat;mask:url(icon-arrow-right.svg) center/contain no-repeat"></span></div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+    <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+      <div style="background:#EEF2FA;border-radius:24px;padding:24px 20px;display:flex;flex-direction:column;gap:14px">
+        <div style="font:900 18px/1.2 'Montserrat',sans-serif;text-transform:uppercase">Здесь пока нет подходящих групп</div>
+        <div style="font:500 14px/1.5 'Montserrat',sans-serif;color:#48536F">Попробуйте соседний район или оставьте заявку — предложим ближайший вариант</div>
+        <div onClick="{{ openPlain }}" style="height:52px;border-radius:999px;background:#E71E2B;color:#fff;display:flex;align-items:center;justify-content:center;font:800 14px 'Montserrat',sans-serif;cursor:pointer">Подобрать группу</div>
+      </div>
+    </sc-if>
+  </div>
+  <sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}">
+    <div style="margin:12px 12px 0;font:italic 500 12px/1.4 'Montserrat',sans-serif;color:#E71E2B">Нужно от школы: актуальное расписание — день, время, возраст, зал, тренер</div>
+  </sc-if>
+</section>
+
+<section id="halls" data-screen-label="03 Залы" style="margin:0 8px;border-radius:28px;background:#EEF2FA;padding:40px 8px 8px">
+  <h2 style="margin:0 12px 20px;font:900 30px/1.05 'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:-.02em">Пять <span style="display:inline-block;background:#0A1E4B;color:#fff;border-radius:14px;padding:0 12px 4px;transform:rotate(-2deg)">залов</span> в&nbsp;Омске</h2>
+  <div style="position:relative;height:240px;border-radius:22px;overflow:hidden;background:#DCE4F4">
+    <div style="position:absolute;left:50%;top:50%;width:0;height:0;transform:scale(.5)">
+      <sc-for list="{{ map.tiles }}" as="t" hint-placeholder-count="0"><div style="position:absolute;left:{{ t.x }};top:{{ t.y }};width:256px;height:256px;background:url({{ t.src }}) center/cover;filter:saturate(.5)"></div></sc-for>
+    </div>
+    <div style="position:absolute;left:50%;top:50%;width:0;height:0">
+      <sc-for list="{{ map.pins }}" as="p" hint-placeholder-count="5">
+        <div onClick="{{ p.pick }}" style="position:absolute;left:{{ p.x }};top:{{ p.y }};width:{{ p.s }};height:{{ p.s }};margin-left:{{ p.m }};margin-top:{{ p.m }};border-radius:50%;background:{{ p.bg }};border:3px solid #fff;box-shadow:0 6px 16px rgba(10,30,75,.35);color:#fff;display:flex;align-items:center;justify-content:center;font:900 14px 'Montserrat',sans-serif;cursor:pointer;z-index:{{ p.z }}">{{ p.n }}</div>
+      </sc-for>
+    </div>
+    <a href="https://www.openstreetmap.org/copyright" target="_blank" style="position:absolute;right:10px;bottom:8px;padding:2px 8px;border-radius:8px;background:rgba(255,255,255,.85);font:600 10px 'Montserrat',sans-serif;color:#48536F">© OpenStreetMap</a>
+  </div>
+  <div class="hs" style="display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 8px;margin:8px -8px 0;padding:3px 8px 3px;scrollbar-width:none;align-items:stretch">
+    <sc-for list="{{ hallCards }}" as="h" hint-placeholder-count="5">
+      <div id="{{ h.anchor }}" style="flex:0 0 86%;scroll-snap-align:start;display:flex;flex-direction:column;background:#fff;border-radius:22px;overflow:hidden;box-shadow:{{ h.ring }}">
+        <div style="position:relative;height:150px;background:#DCE4F4">
+          <image-slot id="{{ h.slot }}" shape="rect" placeholder="Фото: вход в зал"></image-slot>
+          <div style="position:absolute;left:12px;top:12px;width:40px;height:40px;border-radius:50%;background:#E71E2B;color:#fff;display:flex;align-items:center;justify-content:center;font:900 16px 'Montserrat',sans-serif;pointer-events:none">{{ h.id }}</div>
+        </div>
+        <div style="padding:18px 16px 16px;display:flex;flex-direction:column;gap:10px;flex:1">
+          <div style="font:900 20px/1.1 'Montserrat',sans-serif;text-transform:uppercase">{{ h.name }}</div>
+          <div style="font:700 14px 'Montserrat',sans-serif;display:flex;align-items:center;gap:8px"><span style="display:block;width:16px;height:16px;flex:none;background:#E71E2B;-webkit-mask:url(icon-map-pin.svg) center/contain no-repeat;mask:url(icon-map-pin.svg) center/contain no-repeat"></span>{{ h.addr }}</div>
+          <div style="display:flex;flex-direction:column;gap:6px;font:500 13px/1.45 'Montserrat',sans-serif;color:#48536F">
+            <div style="display:flex;gap:8px;align-items:flex-start"><span style="display:block;width:15px;height:15px;flex:none;margin-top:2px;background:currentColor;-webkit-mask:url(icon-bus.svg) center/contain no-repeat;mask:url(icon-bus.svg) center/contain no-repeat"></span><div>{{ h.route }}</div></div>
+            <div style="display:flex;gap:8px;align-items:flex-start"><span style="display:block;width:15px;height:15px;flex:none;margin-top:2px;background:currentColor;-webkit-mask:url(icon-car.svg) center/contain no-repeat;mask:url(icon-car.svg) center/contain no-repeat"></span><div>Парковка: {{ h.parking }}</div></div>
+            <div style="display:flex;gap:8px;align-items:flex-start"><span style="display:block;width:15px;height:15px;flex:none;margin-top:2px;background:currentColor;-webkit-mask:url(icon-users.svg) center/contain no-repeat;mask:url(icon-users.svg) center/contain no-repeat"></span><div>Ведут: {{ h.coachNames }}</div></div>
+          </div>
+          <div onClick="{{ h.book }}" style="margin-top:auto;height:50px;border-radius:999px;background:#E71E2B;color:#fff;display:flex;align-items:center;justify-content:center;font:800 14px 'Montserrat',sans-serif;cursor:pointer">Записаться в этот зал</div>
+          <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px">
+            <div onClick="{{ h.show }}" style="height:46px;border-radius:999px;background:#EEF2FA;color:#0A1E4B;display:flex;align-items:center;justify-content:center;font:800 13px 'Montserrat',sans-serif;cursor:pointer">Расписание</div>
+            <a href="{{ h.route_href }}" target="_blank" style="height:46px;border-radius:999px;background:#EEF2FA;color:#0A1E4B;display:flex;align-items:center;justify-content:center;gap:6px;font:800 13px 'Montserrat',sans-serif">Маршрут<span style="display:block;width:14px;height:14px;background:currentColor;-webkit-mask:url(icon-arrow-up-right.svg) center/contain no-repeat;mask:url(icon-arrow-up-right.svg) center/contain no-repeat"></span></a>
+          </div>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section data-screen-label="05 Блок записи" style="margin:40px 8px 0;border-radius:28px;background:#E71E2B;padding:36px 20px 20px;position:relative;overflow:hidden">
+  <img src="circle-stripes.png" alt="" style="position:absolute;width:240px;right:-90px;top:-90px;opacity:.5;pointer-events:none">
+  <div style="position:relative;display:flex;flex-direction:column;gap:12px">
+    <h2 style="margin:0;font:900 28px/1.08 'Montserrat',sans-serif;color:#fff;text-transform:uppercase;letter-spacing:-.02em">Не нашли удобное время?</h2>
+    <div style="font:600 15px/1.5 'Montserrat',sans-serif;color:#fff">Оставьте заявку — предложим ближайший зал и свободное время в группе по возрасту ребёнка</div>
+    <div onClick="{{ openPlain }}" style="margin-top:8px;height:56px;border-radius:999px;background:#fff;color:#E71E2B;display:flex;align-items:center;justify-content:center;font:800 15px 'Montserrat',sans-serif;cursor:pointer">Подобрать группу</div>
+  </div>
+</section>
+
+<footer id="contacts" data-screen-label="06 Подвал" style="padding:40px 20px 24px;display:flex;flex-direction:column;gap:28px">
+  <a href="{{ homeHref }}"><img src="logo-block.png" alt="Звонкий мяч — детская спортивная школа" style="width:140px"></a>
+  <div style="display:flex;flex-direction:column;gap:10px">
+    <div style="font:900 12px 'Montserrat',sans-serif;color:#E71E2B;text-transform:uppercase;margin-bottom:4px">Контакты</div>
+    <a href="tel:+73812000000" style="font:800 20px/1.3 'Montserrat',sans-serif;color:#0A1E4B;display:flex;align-items:center;gap:10px"><span style="display:block;width:18px;height:18px;background:currentColor;-webkit-mask:url(icon-phone-bold.svg) center/contain no-repeat;mask:url(icon-phone-bold.svg) center/contain no-repeat"></span>+7 (3812) 00-00-00</a>
+    <a href="mailto:info@zvonkiy-myach.ru" style="font:600 14px/1.3 'Montserrat',sans-serif;color:#0A1E4B;display:flex;align-items:center;gap:10px"><span style="display:block;width:16px;height:16px;background:currentColor;-webkit-mask:url(icon-mail.svg) center/contain no-repeat;mask:url(icon-mail.svg) center/contain no-repeat"></span>info@zvonkiy-myach.ru</a>
+    <div style="font:500 14px/1.3 'Montserrat',sans-serif;color:#48536F;display:flex;align-items:center;gap:10px"><span style="display:block;width:16px;height:16px;background:currentColor;-webkit-mask:url(icon-clock.svg) center/contain no-repeat;mask:url(icon-clock.svg) center/contain no-repeat"></span>Пн–Сб, 09:00–20:00</div>
+  </div>
+  <div style="border-top:1px solid #DCE4F4;padding-top:18px;display:flex;flex-direction:column;gap:8px;font:500 12px/1.5 'Montserrat',sans-serif;color:#48536F">
+    <div>АНО «Звонкий мяч» · ИНН 0000000000 · ОГРН 0000000000000 · г. Омск</div>
+    <a href="#" style="color:#48536F">Политика обработки данных</a>
+    <a href="#" style="color:#48536F">Публичная оферта</a>
+  </div>
+</footer>
+
+<sc-if value="{{ showBar }}" hint-placeholder-val="{{ true }}">
+  <div style="position:fixed;left:50%;bottom:0;width:100%;max-width:430px;transform:translateX(-50%);z-index:70;padding:10px 10px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(rgba(255,255,255,0),#fff 40%);display:flex;gap:8px">
+    <div onClick="{{ openPlain }}" style="flex:1;height:58px;border-radius:999px;background:#E71E2B;color:#fff;display:flex;align-items:center;justify-content:center;font:800 16px 'Montserrat',sans-serif;cursor:pointer;box-shadow:0 10px 24px rgba(231,30,43,.35)">Записаться на пробное</div>
+    <a href="tel:+73812000000" aria-label="Позвонить" style="width:58px;height:58px;border-radius:50%;background:#0A1E4B;color:#fff;display:flex;align-items:center;justify-content:center;flex:none"><span style="display:block;width:20px;height:20px;background:currentColor;-webkit-mask:url(icon-phone-bold.svg) center/contain no-repeat;mask:url(icon-phone-bold.svg) center/contain no-repeat"></span></a>
+  </div>
+</sc-if>
+
+<sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;top:0;bottom:0;left:50%;width:100%;max-width:430px;transform:translateX(-50%);z-index:250;background:#0A1E4B;color:#fff;display:flex;flex-direction:column;padding:10px 10px 24px;overflow:auto">
+    <div style="height:60px;background:#fff;border-radius:999px;display:flex;align-items:center;padding:0 6px 0 18px">
+      <img src="logo-horizontal.png" alt="Звонкий мяч" style="height:30px;flex:none">
+      <div style="flex:1"></div>
+      <div onClick="{{ toggleMenu }}" aria-label="Закрыть" style="width:48px;height:48px;border-radius:50%;background:#E71E2B;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer"><span style="display:block;width:20px;height:20px;background:currentColor;-webkit-mask:url(icon-x.svg) center/contain no-repeat;mask:url(icon-x.svg) center/contain no-repeat"></span></div>
+    </div>
+    <nav style="display:flex;flex-direction:column;padding:28px 12px 0">
+      <sc-for list="{{ menu }}" as="m" hint-placeholder-count="5">
+        <a href="{{ m.href }}" onClick="{{ closeMenu }}" style="display:flex;justify-content:space-between;align-items:center;min-height:64px;border-bottom:1px solid rgba(255,255,255,.14);font:900 24px/1.1 'Montserrat',sans-serif;text-transform:uppercase;color:{{ m.color }}">{{ m.t }}<span style="display:block;width:20px;height:20px;background:#E71E2B;-webkit-mask:url(icon-arrow-right.svg) center/contain no-repeat;mask:url(icon-arrow-right.svg) center/contain no-repeat"></span></a>
+      </sc-for>
+    </nav>
+    <div style="margin-top:auto;padding:28px 12px 0;display:flex;flex-direction:column;gap:12px">
+      <a href="tel:+73812000000" style="font:800 22px 'Montserrat',sans-serif;color:#fff">+7 (3812) 00-00-00</a>
+      <div style="font:500 14px 'Montserrat',sans-serif;color:#DCE4F4">Пн–Сб, 09:00–20:00</div>
+      <div onClick="{{ openPlain }}" style="margin-top:8px;height:58px;border-radius:999px;background:#E71E2B;color:#fff;display:flex;align-items:center;justify-content:center;font:800 16px 'Montserrat',sans-serif;cursor:pointer">Записаться на пробное</div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ sheetOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeSheet }}" style="position:fixed;inset:0;z-index:300;background:rgba(10,30,75,.82);display:flex;align-items:flex-end;justify-content:center">
+    <div onClick="{{ stop }}" style="width:100%;max-width:430px;max-height:85vh;overflow:auto;background:#fff;border-radius:28px 28px 0 0;padding:12px 12px calc(16px + env(safe-area-inset-bottom))">
+      <div style="width:44px;height:5px;border-radius:999px;background:#DCE4F4;margin:0 auto 16px"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:0 8px 12px">
+        <div style="font:900 22px/1.1 'Montserrat',sans-serif;color:#0A1E4B;text-transform:uppercase">{{ sheetTitle }}</div>
+        <div onClick="{{ closeSheet }}" aria-label="Закрыть" style="width:44px;height:44px;border-radius:50%;background:#EEF2FA;color:#0A1E4B;flex:none;display:flex;align-items:center;justify-content:center;cursor:pointer"><span style="display:block;width:20px;height:20px;background:currentColor;-webkit-mask:url(icon-x.svg) center/contain no-repeat;mask:url(icon-x.svg) center/contain no-repeat"></span></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <sc-for list="{{ sheetOptions }}" as="o" hint-placeholder-count="5">
+          <div onClick="{{ o.pick }}" style="min-height:56px;border-radius:18px;background:{{ o.bg }};color:{{ o.fg }};display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 18px;cursor:pointer">
+            <div style="display:flex;flex-direction:column;gap:2px">
+              <div style="font:800 15px/1.2 'Montserrat',sans-serif">{{ o.t }}</div>
+              <div style="font:500 12px/1.3 'Montserrat',sans-serif;opacity:.75">{{ o.sub }}</div>
+            </div>
+            <div style="width:24px;height:24px;border-radius:50%;flex:none;border:2px solid {{ o.ring }};background:{{ o.dot }};display:flex;align-items:center;justify-content:center"><div style="width:8px;height:8px;border-radius:50%;background:#fff"></div></div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ modal }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ close }}" style="position:fixed;inset:0;z-index:300;background:rgba(10,30,75,.82);display:flex;align-items:flex-end;justify-content:center">
+    <div onClick="{{ stop }}" style="width:100%;max-width:430px;max-height:92vh;overflow:auto;background:#fff;border-radius:28px 28px 0 0;padding:12px 20px calc(24px + env(safe-area-inset-bottom))">
+      <div style="width:44px;height:5px;border-radius:999px;background:#DCE4F4;margin:0 auto 18px"></div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
+        <div style="font:900 24px/1.1 'Montserrat',sans-serif;color:#0A1E4B;text-transform:uppercase">Запись на<br><span style="display:inline-block;background:#E71E2B;color:#fff;border-radius:12px;padding:0 10px 3px;margin-top:4px;transform:rotate(-2deg)">пробное</span></div>
+        <div onClick="{{ close }}" aria-label="Закрыть" style="width:44px;height:44px;border-radius:50%;background:#EEF2FA;color:#0A1E4B;flex:none;display:flex;align-items:center;justify-content:center;cursor:pointer"><span style="display:block;width:20px;height:20px;background:currentColor;-webkit-mask:url(icon-x.svg) center/contain no-repeat;mask:url(icon-x.svg) center/contain no-repeat"></span></div>
+      </div>
+      <sc-if value="{{ hasCtx }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:16px;background:#EEF2FA;border-radius:16px;padding:12px 16px;font:700 13px/1.4 'Montserrat',sans-serif">{{ ctx }}</div>
+      </sc-if>
+      <sc-if value="{{ fm.notSent }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:18px">
+          <input value="{{ fm.name }}" onChange="{{ fm.onName }}" placeholder="Имя родителя" style="height:56px;border:2px solid {{ fm.nameBc }};border-radius:999px;padding:0 22px;font:600 16px 'Montserrat',sans-serif;color:#0A1E4B;background:#fff;width:100%">
+          <input value="{{ fm.phone }}" onChange="{{ fm.onPhone }}" type="tel" placeholder="Телефон" style="height:56px;border:2px solid {{ fm.phoneBc }};border-radius:999px;padding:0 22px;font:600 16px 'Montserrat',sans-serif;color:#0A1E4B;background:#fff;width:100%">
+          <input value="{{ fm.age }}" onChange="{{ fm.onAge }}" inputMode="numeric" placeholder="Возраст ребёнка" style="height:56px;border:2px solid {{ fm.ageBc }};border-radius:999px;padding:0 22px;font:600 16px 'Montserrat',sans-serif;color:#0A1E4B;background:#fff;width:100%">
+          <div onClick="{{ fm.toggleConsent }}" style="display:flex;gap:12px;align-items:center;cursor:pointer;min-height:44px">
+            <div style="width:24px;height:24px;flex:none;border-radius:6px;border:2px solid {{ fm.consentBc }};background:{{ fm.consentBg }};color:#fff;display:flex;align-items:center;justify-content:center;font:700 13px 'Montserrat',sans-serif">{{ fm.check }}</div>
+            <div style="font:500 13px/1.5 'Montserrat',sans-serif;color:#48536F">Согласен на обработку <a href="#">персональных данных</a></div>
+          </div>
+          <sc-if value="{{ fm.showError }}" hint-placeholder-val="{{ false }}"><div style="font:600 13px 'Montserrat',sans-serif;color:#E71E2B">Заполните отмеченные поля</div></sc-if>
+          <div onClick="{{ fm.submit }}" style="height:58px;margin-top:4px;border-radius:999px;background:#E71E2B;color:#fff;display:flex;align-items:center;justify-content:center;font:800 16px 'Montserrat',sans-serif;cursor:pointer">Отправить заявку</div>
+          <div style="font:italic 500 13px/1.5 'Montserrat',sans-serif;color:#48536F;text-align:center">Перезвоним в течение дня и подтвердим время</div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ fm.sent }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:12px;padding:22px 0 4px">
+          <img src="sign.png" alt="" style="width:60px;height:60px">
+          <div style="font:900 22px/1.15 'Montserrat',sans-serif;color:#0A1E4B;text-transform:uppercase">Заявка отправлена</div>
+          <div style="font:500 14px/1.5 'Montserrat',sans-serif;color:#48536F">Администратор перезвонит и подтвердит время</div>
+          <div onClick="{{ close }}" style="height:54px;margin-top:6px;border-radius:999px;background:#0A1E4B;color:#fff;display:flex;align-items:center;justify-content:center;font:700 15px 'Montserrat',sans-serif;cursor:pointer">Хорошо</div>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:390,&quot;height&quot;:844},&quot;showNotes&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Макет&quot;}}">
+const blankForm = () => ({ name: '', phone: '', age: '', consent: false, tried: false, sent: false });
+const HOME = 'index.html', TR = 'trainers.html', SCH = 'schedule.html', PR = 'price.html', PAR = 'parents.html';
+const HALLS = [
+  { id: 1, slot: 'hall-1', name: 'Центральный', addr: 'ул. Примерная, 1', route: '10 минут от остановки «Центр», автобусы 12, 45', parking: 'есть, 15 мест', ll: [73.368, 54.989] },
+  { id: 2, slot: 'hall-2', name: 'Кировский', addr: 'ул. Примерная, 2', route: '5 минут от остановки «Школьная»', parking: 'только вдоль улицы', ll: [73.305, 54.960] },
+  { id: 3, slot: 'hall-3', name: 'Советский', addr: 'ул. Примерная, 3', route: '7 минут от остановки, автобус 23', parking: 'есть, 8 мест', ll: [73.290, 55.040] },
+  { id: 4, slot: 'hall-4', name: 'Октябрьский', addr: 'ул. Примерная, 4', route: '12 минут от остановки «Парковая»', parking: 'есть, во дворе школы', ll: [73.430, 55.005] },
+  { id: 5, slot: 'hall-5', name: 'Ленинский', addr: 'ул. Примерная, 5', route: '3 минуты от остановки «Заводская»', parking: 'нет', ll: [73.400, 54.940] }
+];
+const COACHES = { maltseva: 'Ирина Мальцева', kovalev: 'Андрей Ковалёв', sokolova: 'Мария Соколова', lapin: 'Дмитрий Лапин', gushchina: 'Наталья Гущина', reznik: 'Павел Резник', kim: 'Юлия Ким', belov: 'Артём Белов', yurieva: 'Светлана Юрьева' };
+const SCHEDULE = [
+  { day: 'Вторник', time: '16:00–17:00', group: 'Начальная', age: '6–8 лет', hall: 1, coach: 'gushchina' },
+  { day: 'Вторник', time: '17:00–18:30', group: 'Учебная', age: '9–11 лет', hall: 1, coach: 'maltseva' },
+  { day: 'Вторник', time: '18:45–20:15', group: 'Спортивная', age: '12–14 лет', hall: 4, coach: 'lapin' },
+  { day: 'Среда', time: '16:00–17:00', group: 'Начальная', age: '6–8 лет', hall: 2, coach: 'kovalev' },
+  { day: 'Среда', time: '17:15–18:45', group: 'Учебная', age: '9–11 лет', hall: 3, coach: 'sokolova' },
+  { day: 'Четверг', time: '17:00–18:30', group: 'Учебная', age: '9–11 лет', hall: 1, coach: 'maltseva' },
+  { day: 'Четверг', time: '18:45–20:15', group: 'Спортивная', age: '12–14 лет', hall: 1, coach: 'belov' },
+  { day: 'Пятница', time: '16:30–17:30', group: 'Начальная', age: '6–8 лет', hall: 3, coach: 'kim' },
+  { day: 'Суббота', time: '10:00–11:30', group: 'Учебная', age: '9–11 лет', hall: 5, coach: 'reznik' },
+  { day: 'Суббота', time: '12:00–13:30', group: 'Учебная', age: '9–14 лет', hall: 3, coach: 'yurieva' }
+];
+const AGES = [{ id: 0, t: 'Любой' }, { id: 1, t: '6–8 лет', r: [6, 8] }, { id: 2, t: '9–11 лет', r: [9, 11] }, { id: 3, t: '12–14 лет', r: [12, 14] }];
+const range = s => s.match(/\d+/g).map(Number);
+const hallOf = id => HALLS.find(h => h.id === id);
+const plural = (n, a, b, c) => (n % 10 === 1 && n % 100 !== 11 ? a : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? b : c);
+const scrollToId = id => { const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 84, behavior: 'smooth' }); };
+
+class Component extends DCLogic {
+  state = { modal: false, menuOpen: false, ctx: '', hall: 0, age: 0, pin: 0, form: blankForm() };
+
+  componentDidMount() {
+    const p = new URLSearchParams(window.location.search);
+    const hall = +p.get('hall') || 0, age = +p.get('age') || 0;
+    if (hall || age) this.setState({ hall, age });
+    this.onKey = e => { if (e.key === 'Escape') this.setState({ menuOpen: false }, this.closeModal); };
+    window.addEventListener('keydown', this.onKey);
+  }
+  componentWillUnmount() { window.removeEventListener('keydown', this.onKey); }
+
+  closeModal = () => this.setState({ modal: false, form: blankForm() });
+  openModal = ctx => this.setState({ modal: true, menuOpen: false, ctx: ctx || '' });
+  showHall = id => { this.setState({ hall: id }); scrollToId('schedule'); };
+
+  form() {
+    const f = this.state.form;
+    const set = patch => this.setState(s => ({ form: { ...s.form, ...patch } }));
+    const ok = f.name.trim() && f.phone.trim() && f.age.trim() && f.consent;
+    const bc = v => (f.tried && !v ? '#E71E2B' : '#DCE4F4');
+    return { ...f, notSent: !f.sent, showError: f.tried && !ok,
+      nameBc: bc(f.name.trim()), phoneBc: bc(f.phone.trim()), ageBc: bc(f.age.trim()),
+      consentBc: f.consent || f.tried ? '#E71E2B' : '#6B7490', consentBg: f.consent ? '#E71E2B' : '#fff', check: f.consent ? '✓' : '',
+      onName: e => set({ name: e.target.value }), onPhone: e => set({ phone: e.target.value }), onAge: e => set({ age: e.target.value }),
+      toggleConsent: () => set({ consent: !f.consent }), submit: () => (ok ? set({ sent: true }) : set({ tried: true })) };
+  }
+
+  renderVals() {
+    const { hall, age, pin } = this.state;
+    const ar = (AGES.find(a => a.id === age) || {}).r;
+    const rows = SCHEDULE.filter(r => (!hall || r.hall === hall) && (!ar || (() => { const [a, b] = range(r.age); return a <= ar[1] && b >= ar[0]; })()))
+      .map(r => { const h = hallOf(r.hall); return { ...r, hallName: h.name, hallAddr: h.addr, coachName: COACHES[r.coach], coachHref: TR + '?coach=' + r.coach,
+        pickHall: () => this.setState({ hall: r.hall }),
+        book: () => this.openModal(`${r.group} группа, ${r.age} · ${r.day}, ${r.time} · ${h.name}, ${h.addr} · ${COACHES[r.coach]}`) }; });
+    const days = [];
+    rows.forEach(r => { const d = days.find(x => x.day === r.day); if (d) d.rows.push(r); else days.push({ day: r.day, rows: [r] }); });
+    days.forEach(d => { d.count = `${d.rows.length} ${plural(d.rows.length, 'тренировка', 'тренировки', 'тренировок')}`; });
+    const pill = on => ({ bg: on ? '#0A1E4B' : '#EEF2FA', fg: on ? '#fff' : '#0A1E4B' });
+    const map = (() => {
+      const Z = 12, K = 0.5;
+      const proj = (lon, lat) => { const n = 256 * 2 ** Z, r = lat * Math.PI / 180; return [(lon + 180) / 360 * n, (1 - Math.log(Math.tan(r) + 1 / Math.cos(r)) / Math.PI) / 2 * n]; };
+      const [cx, cy] = proj(73.36, 54.99);
+      const tx0 = Math.floor(cx / 256), ty0 = Math.floor(cy / 256), tiles = [];
+      for (let dx = -2; dx <= 2; dx++) for (let dy = -2; dy <= 2; dy++) { const x = tx0 + dx, y = ty0 + dy; tiles.push({ src: `https://tile.openstreetmap.de/${Z}/${x}/${y}.png`, x: (x * 256 - cx) + 'px', y: (y * 256 - cy) + 'px' }); }
+      const pins = HALLS.map(h => { const [px, py] = proj(h.ll[0], h.ll[1]); const on = h.id === pin; const s = on ? 44 : 34;
+        return { n: String(h.id), x: ((px - cx) * K) + 'px', y: ((py - cy) * K) + 'px', s: s + 'px', m: (-s / 2) + 'px', bg: on ? '#E71E2B' : '#0A1E4B', z: on ? 2 : 1,
+          pick: () => { this.setState({ pin: h.id }); const el = document.getElementById('hall-card-' + h.id); if (el && el.parentElement) el.parentElement.scrollTo({ left: el.offsetLeft - 8, behavior: 'smooth' }); } }; });
+      return { tiles, pins };
+    })();
+    return {
+      showNotes: this.props.showNotes ?? true,
+      homeHref: HOME,
+      menu: [{ t: 'Расписание и залы', href: SCH, on: 1 }, { t: 'Тренеры', href: TR }, { t: 'Стоимость', href: PR }, { t: 'Родителям', href: PAR }, { t: 'Контакты', href: '#contacts' }].map(m => ({ ...m, color: m.on ? '#E71E2B' : '#fff' })),
+      hallFilters: [{ id: 0, t: 'Все районы' }, ...HALLS.map(h => ({ id: h.id, t: h.name }))].map(f => ({ ...f, ...pill(f.id === hall), pick: () => this.setState({ hall: f.id }) })),
+      ageFilters: AGES.map(a => ({ ...a, ...pill(a.id === age), pick: () => this.setState({ age: a.id }) })),
+      hasFilter: !!(hall || age), reset: () => this.setState({ hall: 0, age: 0 }),
+      filterBtns: [
+        { label: 'Район', value: hall ? hallOf(hall).name : 'Все районы', on: !!hall, open: () => this.setState({ sheet: 'hall' }) },
+        { label: 'Возраст', value: age ? AGES.find(a => a.id === age).t : 'Любой', on: !!age, open: () => this.setState({ sheet: 'age' }) }
+      ].map(b => ({ ...b, bg: b.on ? '#0A1E4B' : '#EEF2FA', fg: b.on ? '#fff' : '#0A1E4B' })),
+      sheetOpen: !!this.state.sheet,
+      sheetTitle: this.state.sheet === 'age' ? 'Возраст ребёнка' : 'Район',
+      sheetOptions: (this.state.sheet === 'age'
+        ? AGES.map(a => ({ id: a.id, t: a.t, sub: a.id ? '' : 'Показать все группы', cur: age, key: 'age' }))
+        : [{ id: 0, t: 'Все районы', sub: 'Показать все залы' }, ...HALLS.map(h => ({ id: h.id, t: h.name, sub: h.addr }))].map(o => ({ ...o, cur: hall, key: 'hall' }))
+      ).map(o => { const on = o.id === o.cur; return { ...o, bg: on ? '#0A1E4B' : '#EEF2FA', fg: on ? '#fff' : '#0A1E4B', ring: on ? '#E71E2B' : '#6B7490', dot: on ? '#E71E2B' : 'transparent',
+        pick: () => this.setState({ [o.key]: o.id, sheet: null }) }; }),
+      closeSheet: () => this.setState({ sheet: null }),
+      days, empty: rows.length === 0,
+      countLabel: `${rows.length} ${plural(rows.length, 'тренировка', 'тренировки', 'тренировок')} в неделю`,
+      map,
+      hallCards: HALLS.map(h => ({ ...h, anchor: 'hall-card-' + h.id, ring: h.id === pin ? '0 0 0 3px #E71E2B' : 'none',
+        coachNames: [...new Set(SCHEDULE.filter(r => r.hall === h.id).map(r => COACHES[r.coach]))].join(', ') || 'уточняется',
+        route_href: 'https://yandex.ru/maps/?text=' + encodeURIComponent('Омск, ' + h.addr),
+        book: () => this.openModal(`Зал: ${h.name}, ${h.addr}`),
+        show: () => this.showHall(h.id) })),
+      openPlain: () => this.openModal(''),
+      showBar: !this.state.modal && !this.state.menuOpen && !this.state.sheet,
+      menuOpen: this.state.menuOpen,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      modal: this.state.modal, ctx: this.state.ctx, hasCtx: !!this.state.ctx,
+      close: this.closeModal, stop: e => e.stopPropagation(),
+      fm: this.form()
+    };
+  }
+}
+</script>
+</body>
+</html>
